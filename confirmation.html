@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Confirmation</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 0;
+        }
+
+        .container {
+            width: 50%;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 5px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        h2 {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        p {
+            margin-bottom: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>Booking Confirmed</h2>
+        <p>Your booking for train no. {{ train_no }} has been confirmed</p>
+        <p></p>
+        <p>Please remember following information</p>
+        <p>Train number : {{train_no}}</p>
+        <p>Train Name: {{train_name}}</P>
+        <p>Arrival Time: {{arrival_time}}</p>
+        <p>Don't forget to take a screenshot or print this confirmation for your records.</p>
+    </div>
+</body>
+</html>

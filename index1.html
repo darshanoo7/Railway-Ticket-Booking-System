@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TRAIN INFORMATION</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 0;
+        }
+
+        .container {
+            width: 50%;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 5px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        h2 {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: bold;
+        }
+
+        select, input[type="text"], input[type="number"] {
+            width: 100%;
+            padding: 8px;
+            margin-bottom: 10px;
+            border: 1px solid #ccc;
+            border-radius: 3px;
+            box-sizing: border-box;
+        }
+
+        button {
+            width: 100%;
+            padding: 10px;
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            border-radius: 3px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #0056b3;
+        }
+
+        form {
+            display: flex;
+            flex-direction: column;
+        }
+
+        form label, form input {
+            margin-bottom: 10px;
+        }
+
+        form input[type="text"], form input[type="number"] {
+            margin-bottom: 20px;
+        }
+
+        form input[readonly] {
+            background-color: #f4f4f4;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>Train Information</h2>
+        <label for="destination">Destination:</label>
+        <select id="destination" onchange="fetchTrainInfo()">
+            <option value="">Select Destination</option>
+            <option value="Kolkata">Kolkata</option>
+            <option value="Allahabad">Allahabad</option>
+            <option value="Jaipur">Jaipur</option>
+            <option value="Jammu Kashmir">Jammu Kashmir</option>
+            <option value="Madhya Pradesh">Madhya Pradesh</option>
+            <option value="Madras">Madras</option>
+            <option value="Patna">Patna</option>
+            <option value="Chandigarh">Chandigarh</option>
+            <option value="Lucknow">Lucknow</option>
+            <option value="Mumbai">Mumbai</option>
+            <option value="Rajasthan">Rajasthan</option>
+            <option value="Delhi">Delhi</option>
+        </select>
+        
+        <form id="trainInfoForm" style="display: none;" action="/confirm_booking" method="POST">
+            <label for="train_name">Train Name:</label>
+            <input type="text" id="train_name" name="train_name" readonly>
+            
+            <label for="train_no">Train No:</label>
+            <input type="text" id="train_no" name="train_no" readonly>
+            
+            <label for="train_desc">Train Description:</label>
+            <input type="text" id="train_desc" name="train_desc" readonly>
+            
+            <label for="arrival_time">Arrival Time:</label>
+            <input type="text" id="arrival_time" name="arrival_time" readonly>
+            
+            <label for="capacity">Capacity:</label>
+            <input type="text" id="capacity" name="capacity" readonly>
+            
+            <label for="ticket_price">Ticket Price:</label>
+            <input type="text" id="ticket_price" name="ticket_price" readonly>
+            
+            <button type="submit">Confirm Booking</button>
+        </form>
+    </div>
+
+    <script>
+        var ticketPrices = [500, 550, 600, 235, 750, 500, 800, 400, 700, 350, 480, 900];
+        
+        function fetchTrainInfo() {
+            var destination = document.getElementById("destination").value;
+            var trainInfoForm = document.getElementById("trainInfoForm");
+            
+            if (destination !== "") {
+                switch(destination) {
+                    case "Kolkata":
+                        populateFields("Ahmednagar Express", "1021", "Third Class", "21:30:00", "700", 0);
+                        break;
+                    case "Allahabad":
+                        populateFields("Kopargaon Express", "1089", "First Class", "16:30:00", "600", 1);
+                        break;
+                    case "Jaipur":
+                        populateFields("Aurangabad Express", "1234", "Third Class", "22:45:00", "800", 2);
+                        break;
+                    case "Jammu Kashmir":
+                        populateFields("Ratnagiri Express", "1276", "First Class", "14:00:00", "1200", 3);
+                        break;
+                    case "Madhya Pradesh":
+                        populateFields("Shirdi Express", "1290", "Second Class", "13:00:00", "3600", 4);
+                        break;
+                    case "Madras":
+                        populateFields("Pune Express", "1345", "Third Class", "22:00:00", "2500", 5);
+                        break;
+                    case "Patna":
+                        populateFields("Nashik Express", "1453", "Third Class", "09:30:00", "800", 6);
+                        break;
+                    case "Chandigarh":
+                        populateFields("Mumbai Express", "1678", "Second Class", "20:30:00", "1200", 7);
+                        break;
+                    case "Lucknow":
+                        populateFields("Ashram Express", "3121", "Third Class", "05:15:00", "700", 8);
+                        break;
+                    case "Mumbai":
+                        populateFields("Rajdhani Express", "3232", "Second Class", "09:00:00", "2300", 9);
+                        break;
+                    case "Rajasthan":
+                        populateFields("Frontier Express", "4563", "Second Class", "16:00:00", "800", 10);
+                        break;
+                    case "Delhi":
+                        populateFields("Frontier Express", "5678", "First Class", "10:00:00", "800", 11);
+                        break;
+                    default:
+                        break;
+                }
+                trainInfoForm.style.display = "block";
+            } else {
+                trainInfoForm.style.display = "none";
+            }
+        }
+        
+        function populateFields(trainName, trainNo, trainDesc, arrivalTime, capacity, index) {
+            document.getElementById("train_name").value = trainName;
+            document.getElementById("train_no").value = trainNo;
+            document.getElementById("train_desc").value = trainDesc;
+            document.getElementById("arrival_time").value = arrivalTime;
+            document.getElementById("capacity").value = capacity;
+            document.getElementById("ticket_price").value = ticketPrices[index];
+        }
+    </script>
+</body>
+</html>

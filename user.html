@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>USER REGISTRATION</title>
+    <style>
+        /* CSS styling */
+        body {
+            background-image: url("https://static.toiimg.com/thumb/msid-92440904,width-748,height-499,resizemode=4,imgsize-178820/.jpg"); /* Replace 'your-image-url.jpg' with the path to your image */
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+        }
+        
+        .container {
+            background-color: rgba(255, 255, 255, 0.8); /* Adjust the alpha value to control the transparency */
+            width: 50%;
+            margin: 0 auto;
+            padding: 20px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+        
+        
+        .container {
+            width: 50%;
+            margin: 0 auto;
+            padding: 20px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: bold;
+        }
+
+        input[type="text"],
+        input[type="number"],
+        input[type="tel"],
+        select {
+            width: calc(100% - 20px); /* Adjusting for padding */
+            padding: 8px;
+            margin-bottom: 10px;
+            border: 1px solid #ccc;
+            border-radius: 3px;
+        }
+
+        select {
+            cursor: pointer;
+        }
+
+        button {
+            width: 100%;
+            padding: 10px;
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            border-radius: 3px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        button:hover {
+            background-color: #0056b3;
+        }
+
+        .name-inputs {
+            display: flex;
+            flex-wrap: wrap;
+        }
+
+        .name-inputs label,
+        .name-inputs input {
+            flex: 1;
+            margin-right: 20px;
+        }
+
+        .name-inputs label {
+            flex-basis: 2px; /* Adjust the width of the labels as needed */
+        }
+
+        .error-message {
+            color: red;
+            font-size: 14px;
+            margin-top: 5px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>User Registration</h2>
+        <form action="/insert" method="POST" onsubmit="return validateForm()">
+            <div class="name-inputs">
+                <label for="first_name">First Name:</label>
+                <input type="text" id="first_name" name="first_name" required>
+                <span id="first_name_error" class="error-message"></span>
+
+                <label for="middle_name">Middle Name:</label>
+                <input type="text" id="middle_name" name="middle_name">
+    
+                <label for="last_name">Last Name:</label>
+                <input type="text" id="last_name" name="last_name" required>
+                <span id="last_name_error" class="error-message"></span>
+            </div>
+
+            <label for="gender">Gender:</label>
+            <select id="gender" name="gender" required>
+                <option value="">Select Gender</option>
+                <option value="male">Male</option>
+                <option value="female">Female</option>
+                <option value="other">Other</option>
+            </select>
+    
+            <label for="age">Age:</label>
+            <input type="number" id="age" name="age" required>
+    
+            <label for="mobile">Mobile Number:</label>
+            <input type="tel" id="mobile" name="mobile" required>
+            <span id="mobile_error" class="error-message"></span>
+    
+            <label for="city">City:</label>
+            <input type="text" id="city" name="city" required>
+            <span id="city_error" class="error-message"></span>
+    
+            <label for="state">State:</label>
+            <input type="text" id="state" name="state" required>
+    
+            <label for="pincode">Pin Code:</label>
+            <input type="text" id="pincode" name="pincode" required>
+
+            <!-- Train Number field added here -->
+            <label for="train_name">Train Name:</label>
+            <input type="text" id="train_name" name="train_name" required>
+
+            <label for="train_no">Train Number:</label>
+            <input type="text" id="train_no" name="train_no" required>
+
+            <label for="arrival_time">Arrival Time:</label>
+            <input type="text" id="arrival_time" name="arrival_time" required>
+
+            <label for="destination">Destination:</label>
+            <input type="text" id="destination" name="destination" required>
+    
+            <button type="submit">Register</button>
+        </form>
+    </div>
+    <script>
+        function validateForm() {
+            var firstName = document.getElementById("first_name").value;
+            var lastName = document.getElementById("last_name").value;
+            var mobile = document.getElementById("mobile").value;
+            var city = document.getElementById("city").value;
+            var firstNameError = document.getElementById("first_name_error");
+            var lastNameError = document.getElementById("last_name_error");
+            var mobileError = document.getElementById("mobile_error");
+            var cityError = document.getElementById("city_error");
+            var isValid = true;
+
+            // Validate first name
+            if (!/^[a-zA-Z]+$/.test(firstName)) {
+                firstNameError.innerHTML = "First name should contain only letters.";
+                isValid = false;
+            } else {
+                firstNameError.innerHTML = "";
+            }
+
+            if (!/^[a-zA-Z]+$/.test(firstName)) {
+                firstNameError.innerHTML = "First name should contain only letters.";
+                isValid = false;
+            } else {
+                firstNameError.innerHTML = "";
+            }
+
+            // Validate last name
+            if (!/^[a-zA-Z]+$/.test(lastName)) {
+                lastNameError.innerHTML = "Last name should contain only letters.";
+                isValid = false;
+            } else {
+                lastNameError.innerHTML = "";
+            }
+
+            // Validate mobile number
+            if (!/^\d{10}$/.test(mobile)) {
+                mobileError.innerHTML = "Mobile number should be exactly 10 digits.";
+                isValid = false;
+            } else {
+                mobileError.innerHTML = "";
+            }
+
+            // Validate city name
+            if (!/^[a-zA-Z\s]+$/.test(city)) {
+                cityError.innerHTML = "City name should contain only letters.";
+                isValid = false;
+            } else {
+                cityError.innerHTML = "";
+            }
+
+            return isValid;
+        }
+    </script>
+</body>
+</html>
